@@ -53,11 +53,12 @@ public class Player : MonoBehaviour
                 if (hit.collider && (Vector3.Distance((Vector2)hit.collider.transform.position, (Vector2)mousePos) < 0.4f))
                 {
                     Debug.Log(hit.collider.name);
-                    Moving bird = hit.collider.GetComponent<Moving>();
-                    if (bird) bird.Die(); 
+                    Bird bird = hit.collider.GetComponent<Bird>();
+                    if (bird) bird.Die();
                 }
             }
         }
+        AudioContrl.Ins.PlaySound(AudioContrl.Ins.shooting);
     }
     void GetTime()
     {

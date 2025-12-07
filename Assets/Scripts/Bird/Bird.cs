@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Moving : MonoBehaviour
+public class Bird : MonoBehaviour
 {
     public float speed;
     Rigidbody2D rb;
@@ -37,6 +37,7 @@ public class Moving : MonoBehaviour
     public void Die()
     {
         isDead = true;
+        GameManager.Ins.BirdKill++;
         Destroy(gameObject);
         if (deathVFX)
         {

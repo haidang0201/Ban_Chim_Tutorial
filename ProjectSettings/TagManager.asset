@@ -47,3 +47,6 @@ TagManager:
   - name: Bird
     uniqueID: 86977485
     locked: 0
+  - name: Crosshair
+    uniqueID: 3917706357
+    locked: 0
