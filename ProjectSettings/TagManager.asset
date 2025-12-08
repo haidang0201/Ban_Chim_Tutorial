@@ -50,3 +50,6 @@ TagManager:
   - name: Crosshair
     uniqueID: 3917706357
     locked: 0
+  - name: canvas
+    uniqueID: 489267519
+    locked: 0

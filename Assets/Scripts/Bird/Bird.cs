@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Bird : MonoBehaviour
@@ -42,6 +41,7 @@ public class Bird : MonoBehaviour
         if (deathVFX)
         {
             Instantiate(deathVFX, transform.position, Quaternion.identity);
+            GameGUIManager.Ins.UpdateKillCountTing(GameManager.Ins.BirdKill);
         }
     }
     void Flip()

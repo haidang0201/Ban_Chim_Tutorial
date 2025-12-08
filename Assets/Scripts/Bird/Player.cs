@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
         if (isShooting)
         {
             this.GetTime();
+            GameGUIManager.Ins.UpdateFireRate(timeDelay / 0.5f);  
         }
     }
     void FixedUpdate()
@@ -66,7 +67,7 @@ public class Player : MonoBehaviour
         if (this.timeDelay <= 0)
         {
             isShooting = false;
-            this.timeDelay = 0.3f;   
+            this.timeDelay = 0.5f;   
         }
     }
 }

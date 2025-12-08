@@ -1,4 +1,5 @@
 
+//using System;
 using System.Collections;
 using UnityEngine;
 
@@ -23,9 +24,17 @@ public class GameManager : Singleton<GameManager>
     }
     public override void Start()
     {
+        GameGUIManager.Ins.GameShowGUI(false);
+        GameGUIManager.Ins.UpdateKillCountTing(birdKill);
+
+
+    }
+    
+     public void PlayGame()
+    {
         StartCoroutine(GameSpawn());
         StartCoroutine(TimeCountDown());
-
+        GameGUIManager.Ins.GameShowGUI(true);
     }
     IEnumerator TimeCountDown()
     {
@@ -33,10 +42,15 @@ public class GameManager : Singleton<GameManager>
         {
             yield return new WaitForSeconds(1f);
             currentTimeLimit--;
-            if(currentTimeLimit <= 0)
+            if (currentTimeLimit <= 0)
             {
                 isGameOver = true;
+                GameGUIManager.Ins.gameDialog.UpdateDialog("ỐI DỒI ÔI", "BEST KILLED : x" + birdKill);
+                GameGUIManager.Ins.gameDialog.Show(true);
+                GameGUIManager.Ins.CurrentDialog = GameGUIManager.Ins.gameDialog;
             }
+                GameGUIManager.Ins.UpdateTimer(IntToTime(currentTimeLimit));
+            
         }
     }
     IEnumerator GameSpawn()
@@ -70,5 +84,12 @@ public class GameManager : Singleton<GameManager>
                 Bird birdClone = Instantiate(birdPrefabs[ranIdx], spawnPos, Quaternion.identity);
             }
         }
+    }
+    string IntToTime(int time)
+    {
+        float minutes = Mathf.Floor(time / 60);//lam tron
+        float seconds = Mathf.RoundToInt(time % 60);
+        return minutes.ToString("00") + " : " + seconds.ToString("00");
+
     }
 }
