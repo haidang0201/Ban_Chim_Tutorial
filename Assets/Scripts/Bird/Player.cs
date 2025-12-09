@@ -12,7 +12,19 @@ public class Player : MonoBehaviour
     private Vector3 mousePos;
     public float speed;
     Vector3 targetPos;
+    public GameObject viewFinder;
+    GameObject viewFinderClone;
 
+
+
+
+    void Start()
+    {
+        if (viewFinder)
+        {
+          viewFinderClone = Instantiate(viewFinder, Vector3.zero, Quaternion.identity);
+        }
+    }
     void Update()
     {
         mousePos = InputManager.instance.target;
@@ -22,6 +34,7 @@ public class Player : MonoBehaviour
         if (isShooting)
         {
             this.GetTime();
+            this.instan();
             GameGUIManager.Ins.UpdateFireRate(timeDelay / 0.5f);  
         }
     }
@@ -59,6 +72,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        CineController.Ins.ShakeTrigger();//rung man hinh
         AudioContrl.Ins.PlaySound(AudioContrl.Ins.shooting);
     }
     void GetTime()
@@ -67,7 +81,11 @@ public class Player : MonoBehaviour
         if (this.timeDelay <= 0)
         {
             isShooting = false;
-            this.timeDelay = 0.5f;   
+            this.timeDelay = 0.5f;
         }
+    }
+    void instan()
+    {
+        if (viewFinderClone) viewFinderClone.transform.position = new Vector3(mousePos.x, mousePos.y, 0);
     }
 }

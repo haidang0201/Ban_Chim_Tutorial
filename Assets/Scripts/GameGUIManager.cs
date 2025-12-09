@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameGUIManager : Singleton<GameGUIManager>
@@ -57,6 +58,45 @@ public class GameGUIManager : Singleton<GameGUIManager>
         {
             fireImageFilled.fillAmount = rate;
         }
+    }
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;// dung man hinh
+        if (this.pauseDialog)
+        {
+            this.pauseDialog.Show(true);
+            this.pauseDialog.UpdateDialog("DỮ DỊ SAO", "BEST KILL : x" + Prefs.bestScore);
+            this.currentDialog = this.pauseDialog;
+        }
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        if (currentDialog)
+        {
+            currentDialog.Show(false);
+        }
+    }
+    public void BackToHome()
+    {
+        ResumeGame();
+        SceneManager.LoadScene(0);
+    }
+    public void Replay()
+    {
+        if (currentDialog)
+        {
+            currentDialog.Show(false);
+        }
+        SceneManager.LoadScene(0);
+        GameManager.Ins.PlayGame();
+    }
+
+    public void ExitGame()
+    {
+        ResumeGame();
+        SceneManager.LoadScene(0);
+        Application.Quit(); //thoat khoi ung dung, ap dung cho dien thoai
     }
 
 }

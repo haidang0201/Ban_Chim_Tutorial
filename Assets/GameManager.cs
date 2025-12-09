@@ -45,9 +45,15 @@ public class GameManager : Singleton<GameManager>
             if (currentTimeLimit <= 0)
             {
                 isGameOver = true;
-                GameGUIManager.Ins.gameDialog.UpdateDialog("ỐI DỒI ÔI", "BEST KILLED : x" + birdKill);
+
+                GameGUIManager.Ins.gameDialog.UpdateDialog("VẬY THÔI Á", "BEST KILLED : x" + birdKill);
+               
+                //GameGUIManager.Ins.gameDialog.UpdateDialog("VẬY THÔI Í", "BEST KILLED : x" + Prefs.bestScore);
+                
+
                 GameGUIManager.Ins.gameDialog.Show(true);
                 GameGUIManager.Ins.CurrentDialog = GameGUIManager.Ins.gameDialog;
+                Prefs.bestScore = birdKill;
             }
                 GameGUIManager.Ins.UpdateTimer(IntToTime(currentTimeLimit));
             
@@ -70,10 +76,10 @@ public class GameManager : Singleton<GameManager>
         //random right
         if (ranCheck >= 0.5)
         {
-            spawnPos = new Vector2(7f, Random.Range(-5f, 2f));
+            spawnPos = new Vector2(14f, Random.Range(-6.5f, 4f));
         }
         else//random left
-            spawnPos = new Vector2(-14f, Random.Range(-5f, 2f));
+            spawnPos = new Vector2(-20f, Random.Range(-6.5f, 4f));
 
         if (birdPrefabs != null && birdPrefabs.Length > 0)
         {

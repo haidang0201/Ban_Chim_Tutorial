@@ -100,3 +100,4 @@ MonoBehaviour:
   timeDelay: 0.3
   isShooting: 0
   speed: 5
+  viewFinder: {fileID: 0}
